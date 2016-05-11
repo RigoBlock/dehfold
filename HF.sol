@@ -1,3 +1,8 @@
+//sol HF
+//contract for investment fund.
+// @authors:
+//    Gabriele Rigo <gabriele.rigo@gmail.com>
+
 contract owned {
     address public owner;
 
