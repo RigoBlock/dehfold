@@ -112,7 +112,7 @@ contract DragoFactory is DragoRegistry {
         //address verifiedDrago = createDrago("draghetto", "DRG");
     }
     
-    function createDrago(string _name, string _symbol) returns (address _Drago/*, uint dragoID*/) {
+    function createDrago(string _name, string _symbol) returns (address drago/*, uint dragoID*/) {
         Drago newDrago = (new Drago(_name, _symbol));
         newDragos.push(address(newDrago));
         Drago(drago).transferOwnership(tx.origin);
