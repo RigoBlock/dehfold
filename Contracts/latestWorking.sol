@@ -43,14 +43,13 @@ contract Drago is owned {
     uint256 public sellPrice;
     uint256 public buyPrice;
 
-    mapping (address => uint256) public balanceOf;
+    mapping (address => uint256) public balanceOf; 
 
     event Transfer(address indexed from, address indexed to, uint256 value);
 
-    function Drago(string _dragoName,  string _dragoSymbol/*, uint8 _decimalUnits*/) {
+    function Drago(string _dragoName,  string _dragoSymbol) {
         name = _dragoName;    
         symbol = _dragoSymbol;
-        //decimals = _decimalUnits;
     }
 	
 	function() {
@@ -82,6 +81,7 @@ contract Drago is owned {
 
 contract DragoRegistry {
     address public drago;
+	uint public dragoID;
     mapping(uint => address) public dragos;
     mapping(address => uint) public toDrago;
     
@@ -101,37 +101,47 @@ contract DragoRegistry {
 }
 
 contract DragoFactory is DragoRegistry {
-    mapping(uint => Drago) deployedContracts;
-    uint numContracts;
+	mapping(address => address[]) public created;
+	mapping(uint => Drago) deployedContracts;
+    uint numDragos;
+	uint numContracts;
 	uint public version = 1;
 	uint[] dragoIDs;
 	address[] newDragos;
     event DragoCreated(string _dragoName, address _drago, address _owner);
     
-    function DragoFactory () {
-        //address verifiedDrago = createDrago("draghetto", "DRG");
+	function DragoFactory (/*address drago*/) {
+		//drago = _drago; ???
+		//dragoID = _dragoID; ???
     }
-    
-    function createDrago(string _name, string _symbol) returns (address drago/*, uint dragoID*/) {
-        Drago newDrago = (new Drago(_name, _symbol));
-        newDragos.push(address(newDrago));
+	
+    function createDrago(string _name, string _symbol) returns (address drago) {
+		Drago newDrago = (new Drago(_name, _symbol));
+		newDragos.push(address(newDrago));
+		//created[msg.sender].push(address(newDrago));
+		//newDragos.push(address(newDrago);
         Drago(drago).transferOwnership(tx.origin);
         register(numContracts, drago);
         DragoCreated(_name, drago, tx.origin);
-        return address(new Drago(_name, _symbol));
+		return address (new Drago(_name, _symbol));
         
-        deployedContracts[numContracts] = new Drago(_name, _symbol);
-        numContracts++;
-        //return deployedContracts[numContracts]
+        //deployedContracts[numContracts] = new Drago(_dragoName, _dragoSymbol);
+        //numContracts++;
+		
+		//return address(new Drago(_dragoName, dragoSymbol));
+        //drago = new Drago(_dragoName, dragoSymbol);
+        //address newDrago = new Drago(_dragoName, _dragoSymbol);    //create a new dragofund
         //newDragos.push(newDrago);
-        
+        //Drago(drago).transferOwnership(tx.origin);             //set the owner to whoever called the function (msg.sender)originally
+        //register(numDragos, drago);
+        //DragoCreated(_dragoName, drago, tx.origin);
     }
     
-    /*function getID (uint i) {
+	/*function getID (uint i) {
     Drago con = Drago(newDragos[i]);
     dragoIDs[i] = con.dragoID();
 }*/
-    
+	
     function() {
         throw;     // Prevents accidental sending of ether to the factory
     }
