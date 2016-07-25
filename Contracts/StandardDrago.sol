@@ -5,7 +5,7 @@ contract StandardDrago is Drago {
     uint256 public sellPrice;
     uint256 public buyPrice;
     
-    function setPrices(uint256 newSellPrice, uint256 newBuyPrice) onlyDragowner {
+    function setPrices(uint256 newSellPrice, uint256 newBuyPrice) onlyDragowner returns (uint256 sellPrice, uint256 buyPrice) {
         sellPrice = newSellPrice*(10**(18 - 4));
         buyPrice = newBuyPrice*(10**(18 - 4));
     }
@@ -24,6 +24,17 @@ contract StandardDrago is Drago {
         } else { return (amount, false); } //evaluate whether necessary condition if address _from = address _standardDrago, throw
     }
     
+/*
+    //previously declared as:
+    function buy() returns (uint amount) {
+        amount = msg.value / buyPrice;
+        balanceOf[msg.sender] += amount;
+        Transfer(0, msg.sender, amount);
+        Transfer(this, msg.sender, amount);
+		return amount;
+    }
+*/    
+    
     function sell(uint amount, address _to, address _from) returns (uint revenue, bool success) {
         if (balances[msg.sender] <= amount && balances[_to] + amount > balances[_to]) {
             balances[msg.sender] -= amount;
@@ -35,10 +46,23 @@ contract StandardDrago is Drago {
         } else { return (revenue, false); }
     }
     
+/*
+    //previously declared as
+    function sell(uint amount) returns (uint revenue) {
+        if (balanceOf[msg.sender] < amount ) throw;
+        balanceOf[msg.sender] -= amount;
+		revenue = amount * sellPrice;
+        msg.sender.send(revenue);
+        Transfer(msg.sender, 0, amount);
+		return revenue;
+    }
+*/
+    
     function balanceOf(address _Dragowner) constant returns (uint256 balance) {
         return balances[_Dragowner];
     }
     
     mapping (address => uint256) balances;
+    
 	
 }
