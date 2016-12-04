@@ -2,6 +2,8 @@
 //! By Gabriele Rigo (Rigo Investment), 2016.
 //! Released under the Apache Licence 2.
 
+pragma solidity ^0.4.6;
+
 import 'HumanStandardDrago.sol'
 import 'HumanStandardDragoFactory.sol'
 
