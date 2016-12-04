@@ -1,3 +1,7 @@
+//! Hedge Fund contract.
+//! By Gabriele Rigo (Rigo Investment), 2016.
+//! Released under the Apache Licence 2.
+
 import "StandardDrago.sol";
 
 contract HumanStandardDrago is StandardDrago {
