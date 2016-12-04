@@ -1,5 +1,7 @@
 // This gist explains some misunderstandings about Solidity constructors parameters and inheritance
 
+pragma solidity ^0.4.6;
+
 // Base contract to extend
 contract BaseContract {
     function BaseContract(bool myVar) {}
