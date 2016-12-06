@@ -20,6 +20,6 @@ contract HumanStandardDrago is StandardDrago {
     }
     
     function() {
-		throw;
+	throw;
     }	
 }
