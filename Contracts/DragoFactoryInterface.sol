@@ -44,6 +44,5 @@ contract DragoFactoryInterface is HumanStandardDrago, HumanStandardDragoFactory 
     function setPrices(uint256 newSellPrice, uint256 newBuyPrice) onlyDragowner returns (uint256 sellPrice, uint256 buyPrice) {
         sellPrice = newSellPrice*(10**(18 - 4));
         buyPrice = newBuyPrice*(10**(18 - 4));
-    }
-    
+    }   
 }
