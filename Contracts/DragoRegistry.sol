@@ -10,8 +10,8 @@ contract DragoRegistry {
     mapping(address => uint) public toDrago;
     mapping(address => address[]) public created;
     address public _drago;
-	uint public _dragoID;
-	bytes public humanStandardByteCode;
+    uint public _dragoID;
+    bytes public humanStandardByteCode;
     
     function accountOf(uint _dragoID) constant returns (address) {
         return dragos[_dragoID];
