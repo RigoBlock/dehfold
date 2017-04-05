@@ -2,6 +2,8 @@
 //! By Gabriele Rigo (Rigo Investment), 2017.
 //! Released under the Apache Licence 2.
 
+pragma solidity ^0.4.8;
+
 contract TheContractFactory is LiveFactory {
   function uploadCode(string identifier, bytes o_code)
            onlyOrNone(deployer[identifierHash(identifier)])
