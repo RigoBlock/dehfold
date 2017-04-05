@@ -1,3 +1,7 @@
+//! Dispatche contract.
+//! By Gabriele Rigo (Rigo Investment), 2017.
+//! Released under the Apache Licence 2.
+
 pragma solidity ^0.4.8;
 
 contract DispatcherStorage {
